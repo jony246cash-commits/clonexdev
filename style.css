@@ -1,0 +1,125 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0d0d0d;
+  color: #e0e0e0;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+a {
+  color: #f5c518;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: #d72638;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem 0;
+}
+
+/* Header */
+header {
+  background-color: #1f1f1f;
+  padding: 1rem 0;
+  border-bottom: 1px solid #333;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  color: #f5c518;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  font-weight: bold;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(145deg, #1f1f1f, #0d0d0d);
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #f5c518;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* Seções */
+section h2 {
+  margin-bottom: 1rem;
+  color: #f5c518;
+}
+
+section p,
+section li {
+  font-size: 1rem;
+  color: #ddd;
+}
+
+/* Lista de serviços */
+#servicos ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+#servicos li {
+  margin-bottom: 0.5rem;
+}
+
+/* Rodapé */
+footer {
+  background-color: #1f1f1f;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 2rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hero {
+    padding: 3rem 1rem;
+  }
+}
