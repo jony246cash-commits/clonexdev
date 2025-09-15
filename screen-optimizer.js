@@ -170,19 +170,25 @@ class ScreenOptimizer {
             }
             
             .screen-9x16 nav a {
-                padding: 1.2rem 1rem;
-                font-size: 1.1rem;
-                margin-bottom: 0.4rem;
-                border-radius: 8px;
-            }
-            
-            .screen-9x16 header {
-                padding: 1rem 0;
-            }
+                 padding: 0.6rem 0.8rem;
+                 font-size: 0.75rem;
+                 margin-bottom: 0.2rem;
+                 border-radius: 6px;
+                 font-weight: 500;
+             }
+             
+             .screen-9x16 header {
+                 padding: 0.5rem 0;
+                 height: 50px;
+             }
+             
+             .screen-9x16 .logo {
+                 font-size: 1.2rem;
+             }
             
             .screen-9x16 body {
-                margin-top: 80px;
-            }
+                 margin-top: 50px;
+             }
         `;
 
         // Estilos para mobile otimizado (outros mobiles)
