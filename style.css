@@ -556,7 +556,20 @@ footer p {
   
   .hero {
     min-height: calc(100vh - 120px);
-    padding: 2rem 0;
+    padding: 3rem 1rem;
+  }
+  
+  .hero h2 {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
   }
   
   section {
@@ -579,6 +592,11 @@ footer p {
     margin-top: 140px;
   }
   
+  .container {
+    padding: 1rem 0.75rem;
+    width: 95%;
+  }
+  
   header .container {
     padding: 2rem 1rem;
   }
@@ -595,6 +613,25 @@ footer p {
     text-align: center;
     width: 100%;
     display: block;
+  }
+  
+  .hero {
+    min-height: calc(100vh - 140px);
+    padding: 2rem 0.5rem;
+  }
+  
+  .hero h2 {
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .hero p {
+    font-size: clamp(0.9rem, 5vw, 1.1rem);
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
   }
   
   .projeto-card,
