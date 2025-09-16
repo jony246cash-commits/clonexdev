@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notas do Dev | Elian Douglas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .dev-detalhes {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+      color: #ffffff;
+    }
+    
+    .dev-titulo {
+      background: linear-gradient(45deg, #00d4ff, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .dev-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    
+    .secao {
+      margin-bottom: 2rem;
+    }
+    
+    .secao h3 {
+      color: #00d4ff;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+      padding-bottom: 0.5rem;
+    }
+    
+    .secao p {
+      color: #e0e0e0;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+    
+    .secao strong {
+      color: #00d4ff;
+      font-weight: 600;
+    }
+    
+    .secao em {
+      color: #ff6b6b;
+      font-style: italic;
+    }
+    
+    .voltar {
+      display: inline-block;
+      margin-bottom: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(45deg, #00d4ff, #0099cc);
+      color: #ffffff;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .voltar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+    }
+    
+    /* Estilos do Music Player */
+    .music-player {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: sticky;
+      top: 2rem;
+      max-height: fit-content;
+    }
+    
+    .player-info {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .player-info h4 {
+      color: #00d4ff;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .player-info p {
+      color: #b0b0b0;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .player-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .control-btn {
+      background: linear-gradient(45deg, #00d4ff, #0099cc);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .control-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+    }
+    
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .volume-icon {
+      font-size: 1.2rem;
+    }
+    
+    .volume-slider {
+      flex: 1;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
+    
+    .volume-slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      background: #00d4ff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    .volume-slider::-moz-range-thumb {
+      width: 15px;
+      height: 15px;
+      background: #00d4ff;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+    
+    #volume-display {
+      color: #00d4ff;
+      font-size: 0.9rem;
+      min-width: 35px;
+      text-align: center;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .dev-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .music-player {
+        position: static;
+        margin-top: 1rem;
+      }
+      
+      .dev-detalhes {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+      
+      .dev-titulo {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>CLONEX DESENVOLVIMENTO</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html#inicio">Início</a></li>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="index.html#servicos">Serviços</a></li>
+          <li><a href="index.html#portfolio">Portfólio</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a href="index.html#portfolio" class="voltar">← Voltar ao Portfólio</a>
+      
+      <div class="dev-detalhes">
+        <h1 class="dev-titulo">Notas do Dev</h1>
+        
+        <div class="dev-content">
+          <div class="dev-text">
+            <div class="secao">
+              <h3>Apresentação</h3>
+              <p>Olá, meu nome é <strong>Elian Douglas</strong>, tenho 25 anos e gostaria de apresentar um pouco sobre minha jornada.</p>
+            </div>
+            
+            <div class="secao">
+              <h3>Origens da Paixão</h3>
+              <p>Minha paixão por tecnologia, games e música nasceu na infância, me levando a uma jornada de aprendizado contínuo. De forma autodidata, mergulhei no universo da manutenção de computadores, aprimorando minhas habilidades e construindo uma base sólida de conhecimento.</p>
+            </div>
+            
+            <div class="secao">
+              <h3>Descoberta do Desenvolvimento Web</h3>
+              <p>O desenvolvimento web, por sua vez, surgiu de uma necessidade prática. Ao assumir a tarefa de criar o site para a Se7e Assessoria, descobri um novo caminho. Com o auxílio de inteligências artificiais, comecei a dar vida a ideias e, desde então, tenho me aprofundado em novas técnicas e tecnologias, sempre buscando inovar e fazer diferente.</p>
+            </div>
+            
+            <div class="secao">
+              <h3>A Jornada Noturna</h3>
+              <p>Esta jornada me levou a passar inúmeras noites em claro, programando ou, em paralelo, exercendo a profissão que abraço desde 2023: o monitoramento de veículos de carga pesada. Foram madrugadas que, embora desafiadoras, foram embaladas pelas músicas que você ouve aqui, e que hoje me dão a certeza de que todo o esforço valeu a pena.</p>
+            </div>
+            
+            <div class="secao">
+              <h3>Agradecimento</h3>
+              <p><em>Agradeço por dedicar seu tempo a conhecer um pouco da minha história.</em></p>
+            </div>
+          </div>
+          
+          <div class="music-player">
+            <div class="player-info">
+              <h4 id="current-song">Carregando...</h4>
+              <p id="current-artist">Playlist do Dev</p>
+            </div>
+            
+            <div class="player-controls">
+              <button id="play-pause-btn" class="control-btn">
+                <span class="play-icon">▶</span>
+                <span class="pause-icon" style="display: none;">⏸</span>
+              </button>
+              <button id="next-btn" class="control-btn">⏭</button>
+            </div>
+            
+            <div class="volume-control">
+              <span class="volume-icon">🔊</span>
+              <input type="range" id="volume-slider" min="0" max="100" value="40" class="volume-slider">
+              <span id="volume-display">40%</span>
+            </div>
+            
+            <audio id="audio-player" preload="auto"></audio>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <img src="logos/Logo de Tecnologia CLONEX.png" alt="Logo CLONEX" class="logo-footer" width="100">
+      <p>&copy; 2025 CLONEX Desenvolvimento. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  
+  <!-- Script do Player de Música -->
+  <script src="music-player.js"></script>
+  
+  <!-- Script de Otimização de Tela -->
+  <script src="screen-optimizer.js"></script>
+</body>
+</html>

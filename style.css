@@ -527,6 +527,53 @@ footer p {
   z-index: 1;
 }
 
+
+
+
+
+/* Estilos para card Conheça-me */
+.conheca-me-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
+    color: #ffffff;
+    text-align: center;
+}
+
+.conheca-me-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+}
+
+.conheca-me-card h3 {
+    color: #00d4ff;
+    margin-bottom: 1rem;
+}
+
+.conheca-me-card p {
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.conheca-me-card .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(45deg, #00d4ff, #0099cc);
+    color: #ffffff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.conheca-me-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+}
+
 /* ===== RESPONSIVIDADE AVANÇADA ===== */
 @media (max-width: 768px) {
   .container {
@@ -594,6 +641,8 @@ footer p {
   body {
     margin-top: 60px;
   }
+  
+
   
   .container {
     padding: 1rem 0.75rem;

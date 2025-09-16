@@ -3,14 +3,28 @@
 
 class ScreenOptimizer {
     constructor() {
+        this.deviceType = {};
+        
         this.init();
-        this.bindEvents();
     }
-
+    
     init() {
         this.detectScreenType();
-        this.optimizeFor16x9();
-        this.applyDynamicStyles();
+        this.forceMobileToDesktop();
+        
+        // Aplicar forçamento quando a tela for redimensionada
+        window.addEventListener('resize', () => {
+            this.detectScreenType();
+            this.forceMobileToDesktop();
+        });
+        
+        // Aplicar forçamento quando a orientação mudar
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                this.detectScreenType();
+                this.forceMobileToDesktop();
+            }, 100);
+        });
     }
 
     detectScreenType() {
@@ -54,53 +68,131 @@ class ScreenOptimizer {
         console.log('Tipo de tela detectado:', this.deviceType);
     }
 
-    optimizeFor16x9() {
-        const { width, height, currentRatio, is9x16, isMobile } = this.deviceType;
+    forceMobileToDesktop() {
+        const { isMobile, isTablet } = this.deviceType;
         
-        // Se for 9:16 mobile, otimizar para essa proporção
-        if (is9x16 && isMobile) {
-            const ideal9x16Ratio = 9 / 16;
-            let optimizedWidth, optimizedHeight;
-
-            if (currentRatio > ideal9x16Ratio) {
-                // Tela muito larga para 9:16 - ajustar baseado na altura
-                optimizedHeight = height;
-                optimizedWidth = height * ideal9x16Ratio;
-            } else {
-                // Tela muito alta para 9:16 - ajustar baseado na largura
-                optimizedWidth = width;
-                optimizedHeight = width / ideal9x16Ratio;
-            }
-
-            this.optimizedDimensions = {
-                width: optimizedWidth,
-                height: optimizedHeight,
-                marginX: Math.max(0, (width - optimizedWidth) / 2),
-                marginY: Math.max(0, (height - optimizedHeight) / 2),
-                ratio: '9:16'
-            };
+        // Se for dispositivo móvel (mas não tablet), forçar modo desktop
+        if (isMobile && !isTablet) {
+            // Definir viewport para modo desktop
+            this.setDesktopViewport();
+            
+            // Aplicar estilos para forçar layout desktop
+            this.applyDesktopForcing();
+            
+            // Adicionar classe indicativa
+            document.body.classList.add('mobile-forced-desktop');
+            
+            console.log('Mobile detectado - Forçando modo desktop');
         } else {
-            // Calcular dimensões ideais para 16:9
-            const ideal16x9Ratio = 16 / 9;
-            let optimizedWidth, optimizedHeight;
-
-            if (currentRatio > ideal16x9Ratio) {
-                // Tela muito larga - ajustar baseado na altura
-                optimizedHeight = height;
-                optimizedWidth = height * ideal16x9Ratio;
-            } else {
-                // Tela muito alta - ajustar baseado na largura
-                optimizedWidth = width;
-                optimizedHeight = width / ideal16x9Ratio;
+            // Remover forçamento se não for mobile
+            document.body.classList.remove('mobile-forced-desktop');
+            this.removeDesktopForcing();
+        }
+    }
+    
+    setDesktopViewport() {
+        // Encontrar ou criar meta viewport
+        let viewport = document.querySelector('meta[name="viewport"]');
+        
+        if (!viewport) {
+            viewport = document.createElement('meta');
+            viewport.name = 'viewport';
+            document.head.appendChild(viewport);
+        }
+        
+        // Definir viewport para simular desktop (largura fixa)
+        viewport.content = 'width=1024, initial-scale=0.5, maximum-scale=1.0, user-scalable=yes';
+    }
+    
+    applyDesktopForcing() {
+        // Criar ou atualizar estilos para forçar desktop
+        let styleElement = document.getElementById('desktop-forcing-styles');
+        
+        if (!styleElement) {
+            styleElement = document.createElement('style');
+            styleElement.id = 'desktop-forcing-styles';
+            document.head.appendChild(styleElement);
+        }
+        
+        styleElement.textContent = `
+            .mobile-forced-desktop {
+                min-width: 1024px !important;
+                overflow-x: auto !important;
             }
-
-            this.optimizedDimensions = {
-                width: optimizedWidth,
-                height: optimizedHeight,
-                marginX: Math.max(0, (width - optimizedWidth) / 2),
-                marginY: Math.max(0, (height - optimizedHeight) / 2),
-                ratio: '16:9'
-            };
+            
+            .mobile-forced-desktop * {
+                -webkit-text-size-adjust: none !important;
+                text-size-adjust: none !important;
+            }
+            
+            .mobile-forced-desktop .container {
+                max-width: 1200px !important;
+                margin: 0 auto !important;
+                padding: 0 2rem !important;
+            }
+            
+            .mobile-forced-desktop header {
+                height: auto !important;
+                padding: 1rem 0 !important;
+            }
+            
+            .mobile-forced-desktop nav ul {
+                display: flex !important;
+                flex-direction: row !important;
+            }
+            
+            .mobile-forced-desktop nav a {
+                padding: 0.5rem 1rem !important;
+                font-size: 1rem !important;
+                margin: 0 0.5rem !important;
+                border-radius: 4px !important;
+            }
+            
+            .mobile-forced-desktop .hero {
+                min-height: calc(100vh - 80px) !important;
+                padding: 4rem 0 !important;
+            }
+            
+            .mobile-forced-desktop .hero h2 {
+                font-size: 3rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .mobile-forced-desktop .hero p {
+                font-size: 1.2rem !important;
+                max-width: 600px !important;
+            }
+            
+            .mobile-forced-desktop .projetos-grid {
+                display: grid !important;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+                gap: 2rem !important;
+            }
+            
+            .mobile-forced-desktop .dev-content {
+                display: grid !important;
+                grid-template-columns: 2fr 1fr !important;
+                gap: 3rem !important;
+            }
+            
+            .mobile-forced-desktop .music-player {
+                position: sticky !important;
+                top: 2rem !important;
+            }
+        `;
+    }
+    
+    removeDesktopForcing() {
+        // Restaurar viewport original
+        let viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.content = 'width=device-width, initial-scale=1.0';
+        }
+        
+        // Remover estilos de forçamento
+        let styleElement = document.getElementById('desktop-forcing-styles');
+        if (styleElement) {
+            styleElement.remove();
         }
     }
 
